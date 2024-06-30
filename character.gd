@@ -13,7 +13,6 @@ var chosen_dir = Vector2.ZERO
 var acceleration = Vector2.ZERO
 @onready var debug = $debug
 
-# Called when the node enters the scene tree for the first time.
 func _ready():
 	interest.resize(segments)
 	danger.resize(segments)
@@ -30,17 +29,15 @@ func createLine(start:Vector2, direction:Vector2, length:float):
 	instance.add_point(direction * length)
 	return instance
 	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _physics_process(_delta):
 	set_interest(get_global_mouse_position())
 	set_danger()
 	choose_direction()
 	
-	print('interest: ', interest)
+	#print('interest: ', interest)
 	#print('danger: ', danger)
 	
 	var desired_velocity = chosen_dir.rotated(rotation) * max_speed
-	#velocity = desired_velocity
 	velocity = velocity.lerp(desired_velocity, steer_force)
 	rotation = velocity.angle()
 	
