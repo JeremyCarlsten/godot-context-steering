@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://dcwfxstpwgh6c"]
+[gd_scene load_steps=5 format=3 uid="uid://dcwfxstpwgh6c"]
 
 [ext_resource type="Script" path="res://character.gd" id="1_s7ret"]
 [ext_resource type="Texture2D" uid="uid://b2ojb15b1wxly" path="res://icon.svg" id="2_bd2u6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5ryv0"]
-radius = 11.9221
+radius = 21.5136
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e7h81"]
+radius = 346.53
 
 [node name="Character" type="CharacterBody2D"]
 script = ExtResource("1_s7ret")
@@ -19,3 +22,11 @@ scale = Vector2(3.44, 3.44)
 shape = SubResource("CircleShape2D_5ryv0")
 
 [node name="debug" type="Node2D" parent="."]
+
+[node name="inRange" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="inRange"]
+shape = SubResource("CircleShape2D_e7h81")
+
+[connection signal="body_entered" from="inRange" to="." method="_on_in_range_body_entered"]
+[connection signal="body_exited" from="inRange" to="." method="_on_in_range_body_exited"]
